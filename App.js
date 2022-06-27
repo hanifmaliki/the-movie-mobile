@@ -8,10 +8,45 @@ import PopularTVShows from './src/Screens/PopularTVShows';
 import Home from './src/Screens/Home';
 import { NativeBaseProvider } from 'native-base';
 import MyContext from './src/Context/MyContext';
-// import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Movies from './src/Screens/Movies';
+import TVShows from './src/Screens/TVShows';
 
-const Stack = createNativeStackNavigator();
-// const Drawer = createDrawerNavigator();
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen options={{ title: "Home" }} name="Home Screen" component={Home} />
+    </HomeStack.Navigator>
+  );
+}
+
+const MoviesStack = createNativeStackNavigator();
+
+function MoviesStackScreen() {
+  return (
+    <MoviesStack.Navigator>
+      <MoviesStack.Screen options={{ title: "Movies" }} name="Movies Screen" component={Movies} />
+      <MoviesStack.Screen name="Top Rated Movies" component={TopRatedMovies} />
+      <MoviesStack.Screen name="Upcoming Movies" component={UpcomingMovies} />
+    </MoviesStack.Navigator>
+  );
+}
+
+const TVShowsStack = createNativeStackNavigator();
+
+function TVShowsStackScreen() {
+  return (
+    <TVShowsStack.Navigator>
+      <TVShowsStack.Screen options={{ title: "TV Shows" }} name="TV Shows Screen" component={TVShows} />
+      <TVShowsStack.Screen name="Top Rated TV Shows" component={TopRatedTVShows} />
+      <TVShowsStack.Screen name="Popular TV Shows" component={PopularTVShows} />
+    </TVShowsStack.Navigator>
+  );
+}
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [dataPopShows, setDataPopShows] = useState({})
@@ -32,21 +67,13 @@ export default function App() {
     }}>
       <NativeBaseProvider>
         <NavigationContainer>
-          {/* <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="Top Rated Movies2" component={TopRatedMovies} />
-          </Drawer.Navigator> */}
-          <Stack.Navigator>
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ title: 'The Movie' }}
-            />
-            <Stack.Screen name="Top Rated Movies" component={TopRatedMovies} />
-            <Stack.Screen name="Upcoming Movies" component={UpcomingMovies} />
-            <Stack.Screen name="Top Rated TV Shows" component={TopRatedTVShows} />
-            <Stack.Screen name="Popular TV Shows" component={PopularTVShows} />
-          </Stack.Navigator>
+          <Tab.Navigator screenOptions={{
+            headerShown: false
+          }}>
+            <Tab.Screen name="Home" component={HomeStackScreen} />
+            <Tab.Screen name="Movies" component={MoviesStackScreen} />
+            <Tab.Screen name="TV Show" component={TVShowsStackScreen} />
+          </Tab.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>
     </MyContext.Provider>
