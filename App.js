@@ -8,8 +8,10 @@ import PopularTVShows from './src/Screens/PopularTVShows';
 import Home from './src/Screens/Home';
 import { NativeBaseProvider } from 'native-base';
 import MyContext from './src/Context/MyContext';
+// import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Stack = createNativeStackNavigator();
+// const Drawer = createDrawerNavigator();
 
 export default function App() {
   const [dataPopShows, setDataPopShows] = useState({})
@@ -30,6 +32,10 @@ export default function App() {
     }}>
       <NativeBaseProvider>
         <NavigationContainer>
+          {/* <Drawer.Navigator initialRouteName="Home">
+            <Drawer.Screen name="Home" component={Home} />
+            <Drawer.Screen name="Top Rated Movies2" component={TopRatedMovies} />
+          </Drawer.Navigator> */}
           <Stack.Navigator>
             <Stack.Screen
               name="Home"

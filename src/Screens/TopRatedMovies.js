@@ -14,7 +14,7 @@ function TopRatedMovies() {
     useEffect(() => {
         async function fetchItems() {
             const data = await getTopRated(page)
-            setData(data)
+            data && setData(data)
         }
         fetchItems()
     }, [page])
@@ -22,7 +22,7 @@ function TopRatedMovies() {
     return (
         <>
             {
-                data.results ?
+                data?.results ?
                     <ScrollView>
                         <View style={{ paddingTop: 8, paddingLeft: 8, paddingRight: 8 }}>
                             <Pagination
